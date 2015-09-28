@@ -43,13 +43,13 @@ This first vagrant up will take a fairly long time to complete (~30 mins).
 
 # Post provisioning
 
-Next step is to clone the app repository into the app directory. This can be done from the host using:
+Next step is to fork and clone the app repository into the app directory. First go to https://github.com/child-first-authority-fcc-project/webapp and fork the project. Copy the clone url and on the host:
 
-    projectdir$ git clone git@github.com:dting/childfirstauthority.git app
+    projectdir$ git clone <clone url> app
 
 When this completes you can ssh into the vm from the host machine using:
 
-		projectdir$ vagrant ssh
+    projectdir$ vagrant ssh
     vagrant@dev:/vagrant/app$
 
 Next make a copy of the `local.env.sample.js` file to the untracked `local.env.js`:
