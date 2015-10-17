@@ -24,22 +24,22 @@
   include: node.yml
   tags: nodejs
 
-- name: use node 12.7
-  command: /home/vagrant/n/bin/n 0.12.7
-
-- name: Install heroku-toolbelt
-  include: 'heroku.yml'
-  sudo: yes
-  tags: heroku-toolbelt
-
 - name: Register remote PATH File
   shell: "echo $PATH"
   register: nodejs_path_out
+
+- name: use node 12.7
+  sudo: no
+  command: /home/vagrant/n/bin/n 0.12.7
+  environment:
+    N_PREFIX: "/home/vagrant/n"
+    PATH: "/home/vagrant/n/bin:{{ nodejs_path_out.stdout }}"
 
 - name: Npm | Install npm
   sudo: no
   npm: name=npm global=yes executable=/home/vagrant/n/bin/npm state=latest
   environment:
+    N_PREFIX: "/home/vagrant/n"
     PATH: "/home/vagrant/n/bin:{{ nodejs_path_out.stdout }}"
 
 - name: Npm | Install npm packages
@@ -50,9 +50,16 @@
     - bower
     - grunt-cli
     - generator-angular-fullstack
+    - npm-check-updates
   environment:
+    N_PREFIX: "/home/vagrant/n"
     PATH: "/home/vagrant/n/bin:{{ nodejs_path_out.stdout }}"
   tags: npm packages
+
+- name: Install heroku-toolbelt
+  include: 'heroku.yml'
+  sudo: yes
+  tags: heroku-toolbelt
 
 - name: Create app directory for app
   sudo: no
