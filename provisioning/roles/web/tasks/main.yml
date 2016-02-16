@@ -7,13 +7,17 @@
     - curl
     - git
     - ruby
-    - ruby-sass
     - g++
     - libkrb5-dev
     - libpng-dev
     - libfontconfig-dev
     - python-pip
   tags: packages
+
+- name: CSS | Install SASS
+  sudo: yes
+  action: command gem install sass creates=/usr/local/bin/sass
+  tags: css
 
 - name: Create global .gitconfig with default user.name and user.email.
   sudo: no
