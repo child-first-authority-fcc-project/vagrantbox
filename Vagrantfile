@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
   config.hostmanager.ignore_private_ip = false
 
   config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--memory", "1024"]
+    v.customize ["modifyvm", :id, "--memory", "2048"]
   end
 
   # On host > ~/.ssh/ssh-add -K
